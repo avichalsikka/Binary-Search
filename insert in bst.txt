@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+class node
+{
+public:
+	int data;
+	node *left;
+	node *right;
+	node(int d)
+	{
+		data=d;
+		left=NULL;
+		right=NULL;
+	}
+};
+
+node* insert(node* root, int Key)
+{
+    if(root==NULL)
+    {
+        node*temp=new node(Key);
+        temp->right=NULL;
+        temp->left=NULL;
+        return temp;
+    }
+    if(Key>root->data)
+    root->right=insert(root->right,Key);
+    if(Key<root->data)
+    root->left=insert(root->left,Key);
+    return root;
+}
+void inorder(node *root)
+{
+	if(root==NULL)
+		return;
+	inorder(root->left);
+	cout<<root->data<<" ";
+	inorder(root->right);
+}
+int main()
+{
+	node *root=new node(3);
+	root->left=new node(2);
+	root->right=new node(5);
+	root->left->left=new node(1);
+	root->right->left=new node(4);
+	root->right->right=new node(6);
+	root->right->right->right=new node(7);
+	int k=10;
+	inorder(root);
+	cout<<"\n";
+	insert(root,k);
+	inorder(root);
+	return 0;
+}
